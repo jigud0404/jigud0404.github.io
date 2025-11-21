@@ -126,7 +126,6 @@
         </div>
     </section>
 
-    <!-- 이하 main, footer 태그는 변경사항 없으므로 생략 -->
     <main id="about" class="container mx-auto px-6 py-20">
     
         <section id="services" class="py-24">
@@ -285,11 +284,11 @@
         <img id="lightbox-image" src="" alt="스튜디오 확대 사진" class="max-w-[90vw] max-h-[90vh] rounded-lg">
     </div>
     
+    <!-- Swiper 스크립트가 중복되어 하나를 삭제했습니다. -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script>
+    <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // ... (상단 번역 및 다른 코드는 동일하므로 생략) ...
+        /* ===== 번역(translations) 객체 전체를 복원했습니다 ===== */
         const translations = {
             en: {
                 navServices: "Services",
@@ -463,8 +462,7 @@
             if (e.target === lightbox) closeLightbox();
         });
 
-        // ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼ 수정된 부분 ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
-        // 1. EmailJS Public Key 초기화 (따옴표 추가)
+        // EmailJS 연동 코드 (ID는 따옴표로 감싸야 합니다)
         emailjs.init({ publicKey: '0xTvL-eoLmpeUTCui' }); 
         
         const contactForm = document.getElementById('contact-form');
@@ -477,7 +475,6 @@
             submitBtn.disabled = true;
             submitBtn.textContent = currentLang === 'ko' ? '전송 중...' : 'Sending...';
             
-            // 2. Service ID와 Template ID를 입력 (따옴표 추가)
             emailjs.sendForm('service_zwg3y37', 'template_w5vtqfd', this)
                 .then(() => {
                     formFeedback.textContent = currentLang === 'ko' ? '문의가 성공적으로 접수되었습니다. 감사합니다!' : 'Your inquiry has been successfully submitted. Thank you!';
@@ -494,7 +491,6 @@
                     submitBtn.textContent = translations[currentLang][submitKey];
                 });
         });
-        // ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
         const revealElements = document.querySelectorAll('.reveal');
         const observer = new IntersectionObserver((entries) => {
@@ -515,7 +511,7 @@
             });
         });
     });
-</script>
+    </script>
 
-
-
+</body>
+</html>
