@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROCKYPIRE STUDIO - 게임 더빙 전문 스튜디오</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #000000;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s, transform 1s;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #hero {
+            position: relative;
+            overflow: hidden;
+        }
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            transform: translateX(-50%) translateY(-50%);
+            background-size: cover;
+        }
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: -50;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 10;
+        }
+        .lang-btn.active {
+            color: #22d3ee; /* cyan-400 */
+            font-weight: 700;
+        }
+        
+        /* Swiper 커스텀 스타일 */
+        .swiper-container {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            height: 300px;
+        }
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <header class="bg-black bg-opacity-70 backdrop-blur-md fixed top-0 left-0 right-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#hero">
+                <img src="Locave_test.png" alt="Locave 로고" class="h-10 w-auto">
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#services" class="hover:text-cyan-400 transition-colors" data-lang-key="navServices">서비스</a>
+                <a href="#studio-photos" class="hover:text-cyan-400 transition-colors" data-lang-key="navPhotos">스튜디오</a>
+                <a href="#contact" class="bg-cyan-500 hover:bg-cyan-600 text-white font-bold py-2 px-5 rounded-full transition-colors" data-lang-key="navContact">녹음 문의</a>
+                <div class="flex space-x-2 text-gray-400"><button id="lang-ko" class="lang-btn hover:text-white">KO</button><span>/</span><button id="lang-en" class="lang-btn hover:text-white">EN</button></div>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg></button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-90 px-6 pt-2 pb-4">
+            <a href="#services" class="block py-2 hover:text-cyan-400" data-lang-key="navServicesMobile">서비스</a>
+            <a href="#studio-photos" class="block py-2 hover:text-cyan-400" data-lang-key="navPhotosMobile">스튜디오</a>
+            <a href="#contact" class="block mt-2 bg-cyan-500 text-white font-bold py-2 px-4 rounded-full text-center" data-lang-key="navContactMobile">녹음 문의</a>
+            <div class="flex space-x-2 text-gray-400 mt-4 justify-center"><button id="lang-ko-mobile" class="lang-btn hover:text-white">KO</button><span>/</span><button id="lang-en-mobile" class="lang-btn hover:text-white">EN</button></div>
+        </div>
+    </header>
+
+    <section id="hero" class="min-h-screen flex items-center justify-center pt-16">
+        <video autoplay loop muted playsinline id="hero-video">
+            <source src="background.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        <div class="hero-content text-center max-w-4xl mx-auto px-4">
+            <img src="Locave_test.png" alt="Locave 로고" class="w-25 md:w-25 mx-auto mb-8 reveal">
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-wider mb-4 reveal" style="transition-delay: 0.2s;" data-lang-key="heroTitle">Breathe Life into Games</h1>
+            <p class="text-lg md:text-xl text-cyan-400 font-bold mb-8 reveal" style="transition-delay: 0.4s;" data-lang-key="heroSubtitle">게임에 생명력을 불어넣는 더빙 전문 스튜디오</p>
+            <div class="text-base md:text-lg text-gray-200 leading-relaxed max-w-3xl mx-auto mb-12 reveal" style="transition-delay: 0.6s;">
+                <p data-lang-key="heroDesc1"></p>
+                <p class="mt-1" data-lang-key="heroDesc2"></p>
+            </div>
+            <a href="#contact" class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold text-lg py-4 px-10 rounded-full hover:scale-105 transform transition-transform duration-300 reveal" style="transition-delay: 0.8s;" data-lang-key="heroContactBtn">
+                녹음 문의
+            </a>
+        </div>
+    </section>
+
+    <!-- 이하 main, footer 태그는 변경사항 없으므로 생략 -->
+    <main id="about" class="container mx-auto px-6 py-20">
+    
+        <section id="services" class="py-24">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-sm font-bold text-cyan-400 tracking-widest" data-lang-key="serviceHeader">MAIN SERVICE</h2>
+                <p class="text-4xl font-black text-white mt-2" data-lang-key="serviceTitle">체계적인 서비스</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                 <div class="bg-gray-900 p-8 rounded-lg reveal text-center">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 bg-cyan-900 bg-opacity-50 rounded-full mx-auto"><i class="fas fa-clipboard-list fa-2x text-cyan-400"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-4" data-lang-key="s1Title">성우 캐스팅</h3>
+                    <ul class="space-y-3 text-gray-200 inline-block text-left" data-lang-key="s1List"><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>최고의 게임 전문 성우 풀 보유</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>세계관과 캐릭터 분석 기반 캐스팅</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>연기 확인용 샘플 제공</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>예산을 고려한 최적의 캐스팅</li></ul>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-lg reveal text-center" style="transition-delay: 0.2s;">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 bg-cyan-900 bg-opacity-50 rounded-full mx-auto"><i class="fas fa-microphone-alt fa-2x text-cyan-400"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-4" data-lang-key="s2Title">녹음 & 각색</h3>
+                    <ul class="space-y-3 text-gray-200 inline-block text-left" data-lang-key="s2List"><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>장르에 최적화된 녹음 프로세스</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>대본 각색으로 더빙 품질 향상</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>대형 프로젝트 매니지먼트</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>ZOOM을 이용한 원격 녹음 지원</li></ul>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-lg reveal text-center" style="transition-delay: 0.4s;">
+                    <div class="flex items-center justify-center w-16 h-16 mb-6 bg-cyan-900 bg-opacity-50 rounded-full mx-auto"><i class="fas fa-sliders-h fa-2x text-cyan-400"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-4" data-lang-key="s3Title">믹싱 & 마스터링</h3>
+                    <ul class="space-y-3 text-gray-200 inline-block text-left" data-lang-key="s3List"><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>정교한 믹싱으로 균형잡힌 사운드</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>왜곡 없는 선명한 음질 마스터링</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>요구사항에 맞는 오디오 폴리싱</li></ul>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-lg reveal text-center" style="transition-delay: 0.6s;">
+                     <div class="flex items-center justify-center w-16 h-16 mb-6 bg-cyan-900 bg-opacity-50 rounded-full mx-auto"><i class="fas fa-users fa-2x text-cyan-400"></i></div>
+                    <h3 class="text-2xl font-bold text-white mb-4" data-lang-key="s4Title">현지화 전문 인력</h3>
+                    <ul class="space-y-3 text-gray-200 inline-block text-left" data-lang-key="s4List"><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>경력 풍부한 더빙 디렉터</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>전문 성우 캐스팅 디렉터</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>게임 전문 사운드 엔지니어</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>게임 번역 및 각색 전문 작가</li></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="specialty" class="py-24">
+            <div class="text-center max-w-6xl mx-auto reveal">
+                <h2 class="text-sm font-bold text-cyan-400 tracking-widest" data-lang-key="processHeader">OUR PROCESS</h2>
+                <p class="text-4xl font-black text-white mt-2" data-lang-key="processTitle">완벽한 결과물을 위한 6단계 프로세스</p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+                    <div class="bg-gray-900 p-8 rounded-lg text-left transform hover:-translate-y-2 transition-transform duration-300 reveal">
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl font-black text-cyan-500">01</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2" data-lang-key="process1Title">프로젝트 접수 및 가견적 산출</h3>
+                                <p class="text-gray-300" data-lang-key="process1Desc">고객의 요구사항과 대본을 검토해 초기 견적을 산출하고 승인을 받습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-lg text-left transform hover:-translate-y-2 transition-transform duration-300 reveal" style="transition-delay: 0.1s;">
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl font-black text-cyan-500">02</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2" data-lang-key="process2Title">성우 캐스팅 및 대본 각색</h3>
+                                <p class="text-gray-300" data-lang-key="process2Desc">게임과 캐릭터에 맞는 최적의 성우를 선정하고, 필요 시 대본을 각색합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-lg text-left transform hover:-translate-y-2 transition-transform duration-300 reveal" style="transition-delay: 0.2s;">
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl font-black text-cyan-500">03</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2" data-lang-key="process3Title">세션 제작 및 녹음 진행</h3>
+                                <p class="text-gray-300" data-lang-key="process3Desc">프로젝트에 맞는 녹음용 세션을 계획 및 제작하고, 녹음을 진행합니다</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-lg text-left transform hover:-translate-y-2 transition-transform duration-300 reveal" style="transition-delay: 0.3s;">
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl font-black text-cyan-500">04</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2" data-lang-key="process4Title">편집, 믹싱 및 마스터링</h3>
+                                <p class="text-gray-300" data-lang-key="process4Desc">정밀한 편집과 믹싱, 마스터링을 통해 왜곡 없는 선명한 최종 오디오를 완성합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-lg text-left transform hover:-translate-y-2 transition-transform duration-300 reveal" style="transition-delay: 0.4s;">
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl font-black text-cyan-500">05</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2" data-lang-key="process5Title">내부 품질검사(QA) 및 수정</h3>
+                                <p class="text-gray-300" data-lang-key="process5Desc">내부 QA팀이 완성된 파일을 철저히 검사하고, 피드백을 반영해 수정합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-900 p-8 rounded-lg text-left transform hover:-translate-y-2 transition-transform duration-300 reveal" style="transition-delay: 0.5s;">
+                        <div class="flex items-start space-x-4">
+                            <div class="text-3xl font-black text-cyan-500">06</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-2" data-lang-key="process6Title">최종 납품 및 후속 관리</h3>
+                                <p class="text-gray-300" data-lang-key="process6Desc">완성된 파일을 최종 납품하고, 후속 지원과 추가 요청에 유연하게 대응합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="studio-photos" class="py-24 overflow-hidden">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-sm font-bold text-cyan-400 tracking-widest" data-lang-key="photoHeader">STUDIO TOUR</h2>
+                <p class="text-4xl font-black text-white mt-2" data-lang-key="photoTitle">스튜디오 둘러보기</p>
+            </div>
+            <div class="swiper-container mySwiper reveal">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="https://placehold.co/800x600/1a1a1a/ffffff?text=Studio+1" alt="스튜디오 사진 1" class="cursor-pointer gallery-item"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x600/2a2a2a/ffffff?text=Recording+Booth" alt="스튜디오 사진 2" class="cursor-pointer gallery-item"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x600/111111/ffffff?text=Mixing+Console" alt="스튜디오 사진 3" class="cursor-pointer gallery-item"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x600/222222/ffffff?text=Lounge" alt="스튜디오 사진 4" class="cursor-pointer gallery-item"></div>
+                    <div class="swiper-slide"><img src="https://placehold.co/800x600/1c1c1c/ffffff?text=Equipment" alt="스튜디오 사진 5" class="cursor-pointer gallery-item"></div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-24">
+            <div class="max-w-3xl mx-auto text-center reveal">
+                <h2 class="text-4xl font-black text-white mb-4" data-lang-key="contactTitle">녹음 문의</h2>
+                <p class="text-lg text-gray-200 mb-10" data-lang-key="contactDescription">성공적인 프로젝트를 위한 최상의 사운드 솔루션을 제안합니다.<br>프로젝트에 대해 알려주시면 담당자가 신속하게 연락드리겠습니다.</p>
+            </div>
+            <div class="max-w-2xl mx-auto bg-gray-900 p-8 md:p-12 rounded-lg shadow-2xl reveal">
+                <form id="contact-form">
+                    <div class="mb-6">
+                        <label for="name" class="block mb-2 text-sm font-bold text-gray-200" data-lang-key="formName">성함</label>
+                        <input type="text" id="name" name="Name" class="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all" data-lang-key="formNamePlaceholder" placeholder="성함을 입력해주세요" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block mb-2 text-sm font-bold text-gray-200" data-lang-key="formEmail">회신받을 메일 주소</label>
+                        <input type="email" id="email" name="Email" class="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all" data-lang-key="formEmailPlaceholder" placeholder="연락받으실 메일 주소를 입력해주세요" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="subject" class="block mb-2 text-sm font-bold text-gray-200" data-lang-key="formSubject">제목</label>
+                        <input type="text" id="subject" name="Subject" class="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all" data-lang-key="formSubjectPlaceholder" placeholder="제목을 입력해주세요" required>
+                    </div>
+                    <div class="mb-8">
+                        <label for="message" class="block mb-2 text-sm font-bold text-gray-200" data-lang-key="formMessage">문의 내용</label>
+                        <textarea id="message" name="Message" rows="5" class="w-full px-4 py-3 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all" data-lang-key="formMessagePlaceholder" placeholder="프로젝트 내용, 예산, 일정 등 구체적으로 작성해주시면 좋습니다." required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" id="submit-btn" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-full transition-colors text-lg" data-lang-key="formSubmitBtn">
+                            문의 접수하기
+                        </button>
+                    </div>
+                </form>
+                <div id="form-feedback" class="mt-6 text-center font-bold"></div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-black py-6">
+        <div class="container mx-auto px-6 text-center text-gray-500">
+            <p data-lang-key="footerRights">© 2025 ROCKYPIRE STUDIO. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 flex justify-center items-center z-[100] hidden p-4">
+        <span id="lightbox-close" class="absolute top-5 right-8 text-white text-5xl font-bold cursor-pointer hover:text-gray-400 transition-colors">×</span>
+        <img id="lightbox-image" src="" alt="스튜디오 확대 사진" class="max-w-[90vw] max-h-[90vh] rounded-lg">
+    </div>
+    
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // ===== 수정된 부분: 영문 번역 데이터 복원 및 업데이트 =====
+            const translations = {
+                en: {
+                    navServices: "Services",
+                    navPhotos: "Studio",
+                    navContact: "Contact",
+                    navServicesMobile: "Services",
+                    navPhotosMobile: "Studio",
+                    navContactMobile: "Contact",
+                    heroTitle: "Breathe Life into Games!",
+                    heroSubtitle: "A game dubbing and localization studio that brings games to life",
+                    heroDesc1: "Based on a deep understanding and rich experience in game localization, Locave provides the best dubbing quality to maximize player immersion.",
+                    heroDesc2: "We promise a successful project with our one-stop solution covering everything from casting and adaptation to recording, mixing, and mastering.",
+                    heroContactBtn: "Inquire Now",
+                    serviceHeader: "MAIN SERVICE",
+                    serviceTitle: "Systematic Services",
+                    s1Title: "Voice Actor Casting",
+                    s1List: '<li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Vast pool of top-tier game voice actors</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Casting based on world & character analysis</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Sample recordings provided for review</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Optimal casting considering the budget</li>',
+                    s2Title: "Recording & Adaptation",
+                    s2List: '<li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Genre-optimized recording process</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Enhanced dubbing quality through script adaptation</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Management for large-scale projects</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Remote recording support via ZOOM</li>',
+                    s3Title: "Mixing & Mastering",
+                    s3List: '<li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Balanced sound with precise mixing</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Distortion-free, clear audio mastering</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Audio polishing tailored to your needs</li>',
+                    s4Title: "Localization Experts",
+                    s4List: '<li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Experienced dubbing directors</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Professional voice actor casting directors</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Specialized game sound engineers</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>Expert writers for game translation and adaptation</li>',
+                    processHeader: "OUR PROCESS",
+                    processTitle: "6-Step Process for Perfect Results",
+                    process1Title: "Project Intake & Quote",
+                    process1Desc: "We review client requirements and scripts to provide an initial quote for approval.",
+                    process2Title: "Casting & Script Adaptation",
+                    process2Desc: "We select the optimal voice actors for the game and characters, and adapt the script if necessary.",
+                    process3Title: "Session & Recording",
+                    process3Desc: "We plan and create a recording session tailored to the project and proceed with the recording.",
+                    process4Title: "Editing, Mixing & Mastering",
+                    process4Desc: "We complete the final audio with precise editing, mixing, and mastering for clear, distortion-free sound.",
+                    process5Title: "Internal QA & Revisions",
+                    process5Desc: "Our internal QA team thoroughly reviews the completed files and incorporates feedback for revisions.",
+                    process6Title: "Final Delivery & Follow-up",
+                    process6Desc: "We deliver the final files and flexibly respond to any follow-up support or additional requests.",
+                    photoHeader: "STUDIO TOUR",
+                    photoTitle: "Explore Our Studio",
+                    contactTitle: "Recording Inquiry",
+                    contactDescription: "We propose the best sound solutions for your successful project.<br>Please tell us about your project, and a representative will contact you promptly.",
+                    formName: "Name",
+                    formNamePlaceholder: "Please enter your name",
+                    formEmail: "Email Address for Reply",
+                    formEmailPlaceholder: "Please enter your email for a reply",
+                    formSubject: "Subject",
+                    formSubjectPlaceholder: "Please enter the subject",
+                    formMessage: "Inquiry Details",
+                    formMessagePlaceholder: "Details like project scope, budget, and schedule are helpful.",
+                    formSubmitBtn: "Submit Inquiry",
+                    footerRights: "© 2025 ROCKYPIRE STUDIO. All Rights Reserved."
+                },
+                ko: {
+                    navServices: "서비스",
+                    navPhotos: "스튜디오",
+                    navContact: "녹음 문의",
+                    navServicesMobile: "서비스",
+                    navPhotosMobile: "스튜디오",
+                    navContactMobile: "녹음 문의",
+                    heroTitle: "Breathe Life into Games!",
+                    heroSubtitle: "게임에 생명력을 불어넣는 게임 더빙 현지화 스튜디오",
+                    heroDesc1: "로케이브는 게임 현지화에 대한 깊은 이해와 풍부한 경험을 바탕으로, 플레이어의 몰입감을 극대화하는 최고의 더빙 퀄리티를 제공합니다. ",
+                    heroDesc2: "캐스팅부터 각색, 녹음, 믹싱, 마스터링까지 원스톱 솔루션으로 성공적인 프로젝트를 약속드립니다.",
+                    heroContactBtn: "녹음 문의",
+                    serviceHeader: "MAIN SERVICE",
+                    serviceTitle: "체계적인 서비스",
+                    s1Title: "성우 캐스팅",
+                    s1List: '<li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>최고의 게임 전문 성우 풀 보유</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>세계관과 캐릭터 분석 기반 캐스팅</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>연기 확인용 샘플 제공</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>예산을 고려한 최적의 캐스팅</li>',
+                    s2Title: "녹음 & 각색",
+                    s2List: '<li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>장르에 최적화된 녹음 프로세스</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>대본 각색으로 더빙 품질 향상</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>대형 프로젝트 매니지먼트</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>ZOOM을 이용한 원격 녹음 지원</li>',
+                    s3Title: "믹싱 & 마스터링",
+                    s3List: '<li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>정교한 믹싱으로 균형잡힌 사운드</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>왜곡 없는 선명한 음질 마스터링</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>요구사항에 맞는 오디오 폴리싱</li>',
+                    s4Title: "현지화 전문 인력",
+                    s4List: '<li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>경력 풍부한 더빙 디렉터</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>전문 성우 캐스팅 디렉터</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>게임 전문 사운드 엔지니어</li><li><i class="fas fa-check-circle text-cyan-500 mr-2"></i>게임 번역 및 각색 전문 작가</li>',
+                    processHeader: "OUR PROCESS",
+                    processTitle: "완벽한 결과물을 위한 6단계 프로세스",
+                    process1Title: "프로젝트 접수 및 가견적 산출",
+                    process1Desc: "고객의 요구사항과 대본을 검토해 초기 견적을 산출하고 승인을 받습니다.",
+                    process2Title: "성우 캐스팅 및 대본 각색",
+                    process2Desc: "게임과 캐릭터에 맞는 최적의 성우를 선정하고, 필요 시 대본을 각색합니다.",
+                    process3Title: "세션 제작 및 녹음 진행",
+                    process3Desc: "프로젝트에 맞는 녹음용 세션을 계획 및 제작하고, 녹음을 진행합니다",
+                    process4Title: "편집, 믹싱 및 마스터링",
+                    process4Desc: "정밀한 편집과 믹싱, 마스터링을 통해 왜곡 없는 선명한 최종 오디오를 완성합니다.",
+                    process5Title: "내부 품질검사(QA) 및 수정",
+                    process5Desc: "내부 QA팀이 완성된 파일을 철저히 검사하고, 피드백을 반영해 수정합니다.",
+                    process6Title: "최종 납품 및 후속 관리",
+                    process6Desc: "완성된 파일을 최종 납품하고, 후속 지원과 추가 요청에 유연하게 대응합니다.",
+                    photoHeader: "STUDIO TOUR",
+                    photoTitle: "스튜디오 둘러보기",
+                    contactTitle: "녹음 문의",
+                    contactDescription: "성공적인 프로젝트를 위한 최상의 사운드 솔루션을 제안합니다.<br>프로젝트에 대해 알려주시면 담당자가 신속하게 연락드리겠습니다.",
+                    formName: "성함",
+                    formNamePlaceholder: "성함을 입력해주세요",
+                    formEmail: "회신받을 메일 주소",
+                    formEmailPlaceholder: "연락받으실 메일 주소를 입력해주세요",
+                    formSubject: "제목",
+                    formSubjectPlaceholder: "제목을 입력해주세요",
+                    formMessage: "문의 내용",
+                    formMessagePlaceholder: "프로젝트 내용, 예산, 일정 등 구체적으로 작성해주시면 좋습니다.",
+                    formSubmitBtn: "문의 접수하기",
+                    footerRights: "© 2025 ROCKYPIRE STUDIO. All Rights Reserved."
+                }
+            };
+            
+            const setLanguage = (lang) => {
+                document.documentElement.lang = lang;
+                document.querySelectorAll('[data-lang-key]').forEach(element => {
+                    const key = element.getAttribute('data-lang-key');
+                    if (translations[lang] && translations[lang][key]) {
+                        const translation = translations[lang][key];
+                        // Placeholder가 있는 input/textarea 처리
+                        if (element.placeholder !== undefined) {
+                            element.placeholder = translation;
+                        }
+                        // 그 외 모든 요소 처리 (HTML 태그 포함 가능하도록 innerHTML 사용)
+                        else {
+                            element.innerHTML = translation;
+                        }
+                    }
+                });
+
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.id.includes(lang));
+                });
+            };
+
+            const langBtns = document.querySelectorAll('.lang-btn');
+            langBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const lang = e.target.id.includes('ko') ? 'ko' : 'en';
+                    setLanguage(lang);
+                });
+            });
+
+            // 초기 언어 설정 (브라우저 기본 언어 감지 또는 기본 'ko')
+            const userLang = navigator.language.slice(0, 2);
+            const initialLang = (userLang === 'ko') ? 'ko' : 'en';
+            setLanguage(initialLang);
+
+
+            // Swiper 초기화 (변경 없음)
+            var swiper = new Swiper(".mySwiper", {
+                effect: "coverflow",
+                grabCursor: true,
+                centeredSlides: true,
+                loop: true,
+                breakpoints: {
+                    768: { slidesPerView: 3 },
+                    0: { slidesPerView: 1.5 }
+                },
+                coverflowEffect: {
+                    rotate: 40,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+            
+            // 라이트박스 로직 (변경 없음)
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxClose = document.getElementById('lightbox-close');
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    lightboxImage.src = e.target.src;
+                    lightbox.classList.remove('hidden');
+                });
+            });
+            const closeLightbox = () => lightbox.classList.add('hidden');
+            lightboxClose.addEventListener('click', closeLightbox);
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+
+            // EmailJS Public Key 초기화 (변경 없음, 본인 키로 교체 필요)
+            emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' }); 
+            const contactForm = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const formFeedback = document.getElementById('form-feedback');
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                const currentLang = document.documentElement.lang;
+                submitBtn.disabled = true;
+                submitBtn.textContent = currentLang === 'ko' ? '전송 중...' : 'Sending...';
+
+                emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                    .then(() => {
+                        formFeedback.textContent = currentLang === 'ko' ? '문의가 성공적으로 접수되었습니다. 감사합니다!' : 'Your inquiry has been successfully submitted. Thank you!';
+                        formFeedback.className = 'mt-6 text-center font-bold text-green-400';
+                        contactForm.reset();
+                    }, (error) => {
+                        formFeedback.textContent = currentLang === 'ko' ? '오류가 발생했습니다. 잠시 후 다시 시도해주세요.' : 'An error occurred. Please try again later.';
+                        formFeedback.className = 'mt-6 text-center font-bold text-red-400';
+                        console.log('FAILED...', error);
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                        const submitKey = 'formSubmitBtn';
+                        submitBtn.textContent = translations[currentLang][submitKey];
+                    });
+            });
+
+            // 스크롤 시 애니메이션 (변경 없음)
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(el => observer.observe(el));
+
+            // 모바일 메뉴 토글 (변경 없음)
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
